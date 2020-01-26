@@ -9,6 +9,7 @@ import com.example.mystopwatch.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // mark if the timer is running
     private var isRunning: Boolean = false
 
     private var milliSeconds: Int = 0
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding = DataBindingUtil
                         .setContentView(this, R.layout.activity_main)
 
-        val intervalTime: Long = 10
-        val maxSeconds: Long = 86400
+        // Timer
+        val intervalTime: Long = 10 // interval time between 2 ticks
+        val maxSeconds: Long = 86400 // max countdown time
         val timer =
             object: CountDownTimer(maxSeconds * 1000, intervalTime) {
                 override fun onTick(t0: Long) {
@@ -42,7 +44,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         binding.triggerButton.setOnClickListener {
-//            Toast.makeText(this, "Triggered", Toast.LENGTH_SHORT).show()
 
             if(!isRunning) {
                 binding.triggerButton.text = getString(R.string.stop_text)
@@ -53,6 +54,14 @@ class MainActivity : AppCompatActivity() {
                 isRunning = false
                 timer.cancel()
             }
+        }
+
+        binding.resetButton.setOnClickListener {
+
+            binding.timerText.text = "00:00.00"
+            minutes = 0
+            seconds = 0
+            milliSeconds = 0
         }
     }
 
