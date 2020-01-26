@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lateinit var binding: ActivityMainBinding
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil
+                        .setContentView(this, R.layout.activity_main)
 
         val intervalTime: Long = 10
         val maxSeconds: Long = 86400
@@ -42,10 +42,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         binding.triggerButton.setOnClickListener {
+//            Toast.makeText(this, "Triggered", Toast.LENGTH_SHORT).show()
 
-            Toast.makeText(this, "Triggered", Toast.LENGTH_SHORT).show()
-
-            if(isRunning == false) {
+            if(!isRunning) {
                 binding.triggerButton.text = getString(R.string.stop_text)
                 isRunning = true
                 timer.start()
@@ -57,35 +56,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onTimerStart() {
-
-    }
-
-    private fun onTimerStop() {
-
-    }
-
     fun formatTime(minutes: Int, seconds: Int, milliSeconds: Int): String {
 
-        var strMillis: String
-        if(milliSeconds/10 < 10) {
-            strMillis = "0${milliSeconds/10}"
+        val strMillis: String = if(milliSeconds/10 < 10) {
+            "0${milliSeconds/10}"
         } else {
-            strMillis = milliSeconds.toString()
+            (milliSeconds/10).toString()
         }
 
-        var strSeconds: String
-        if(seconds < 10) {
-            strSeconds = "0$seconds"
+        val strSeconds: String = if(seconds < 10) {
+            "0$seconds"
         } else {
-            strSeconds = seconds.toString()
+            seconds.toString()
         }
 
-        var strMinutes: String
-        if(minutes < 10) {
-            strMinutes = "0$minutes"
+        val strMinutes: String = if(minutes < 10) {
+            "0$minutes"
         } else {
-            strMinutes = minutes.toString()
+            minutes.toString()
         }
 
         return "$strMinutes:$strSeconds.$strMillis"
