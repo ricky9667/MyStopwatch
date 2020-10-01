@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     // mark if the timer is running
     private var isRunning: Boolean = false
-
+    private var mewomewo = "mewomewo"
     private var milliSeconds: Int = 0
     private var seconds: Int = 0
     private var minutes: Int = 0
